@@ -2,6 +2,8 @@
 """
 CSCI 1470 Deep Learning Environment Setup Script
 Cross-platform virtual environment setup for Mac, Windows, and Linux
+
+Authors: Armaan Patankar
 """
 
 import os
@@ -235,7 +237,7 @@ def print_next_steps(env_path, os_type):
     
     print_colored(f"\nVirtual environment created at: {env_path.resolve()}", Colors.CYAN)
     
-    print_colored("\nIdeal Directory Structure:", Colors.CYAN)
+    print_colored("\nIntended Directory Structure:", Colors.CYAN)
     parent_name = Path("..").resolve().name
     current_name = Path.cwd().name
     print_colored(f"  {parent_name}/", Colors.YELLOW)
@@ -249,7 +251,7 @@ def print_next_steps(env_path, os_type):
     print_colored("  deactivate", Colors.YELLOW)
     
     if INSTALL_IN_PARENT:
-        print_colored("\nWorking on Future Assignments:", Colors.CYAN)
+        print_colored("\nWorking on Future Assignments!!!", Colors.CYAN)
         print_colored("  1. Clone new assignment repos in the parent directory", Colors.YELLOW)
         print_colored("  2. Activate the environment from any assignment directory", Colors.YELLOW)
         print_colored("  3. The same environment will be used for all assignments", Colors.YELLOW)
@@ -261,8 +263,8 @@ def main():
     
     # Check Python version
     if not check_python_version():
-        print_colored("\nPlease install Python 3.11+ and run this script again.", Colors.RED)
-        print_colored("Download from: https://www.python.org/downloads/", Colors.YELLOW)
+        print_colored("\nPlease install Python 3.11.x and run this script again.", Colors.RED)
+        print_colored("Follow the troubleshooting steps on the handout if you are having issues!", Colors.YELLOW)
         sys.exit(1)
     
     # Detect OS
@@ -270,18 +272,18 @@ def main():
     
     # Check system dependencies
     if not check_system_dependencies(os_type):
-        print_colored("Please install required system dependencies and run again.", Colors.RED)
+        print_colored("Please install required system dependencies and run again. Follow the troubleshooting steps on the handout if you are having issues!", Colors.RED)
         sys.exit(1)
     
     # Create virtual environment
     env_path = create_virtual_environment()
     if not env_path:
-        print_colored("Failed to create virtual environment.", Colors.RED)
+        print_colored("Failed to create virtual environment. Follow the troubleshooting steps on the handout if you are having issues!", Colors.RED)
         sys.exit(1)
     
     # Install requirements
     if not install_requirements(env_path, os_type):
-        print_colored("Failed to install requirements.", Colors.RED)
+        print_colored("Failed to install requirements. Follow the troubleshooting steps on the handout if you are having issues!", Colors.RED)
         sys.exit(1)
     
     # Setup Jupyter kernel
@@ -291,10 +293,7 @@ def main():
     if not verify_installation(env_path, os_type):
         print_colored("Installation verification failed. Some packages may not work correctly.", Colors.YELLOW)
         print_colored("\nTroubleshooting:", Colors.CYAN)
-        print_colored("- If TensorFlow import fails, try: pip install --upgrade tensorflow==2.15.*", Colors.YELLOW)
-        print_colored("- For GPU support, see TensorFlow GPU installation guide", Colors.YELLOW)
-        print_colored("- On Apple Silicon, some packages may need Rosetta 2", Colors.YELLOW)
-
+        print_colored(" -  Follow the troubleshooting steps on the handout if you are having issues!", Colors.YELLOW)
     
     # Print next steps
     print_next_steps(env_path, os_type)
